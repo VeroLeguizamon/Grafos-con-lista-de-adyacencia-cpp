@@ -12,7 +12,6 @@ private:
 	std::string nombre;
 	Lista<Arista*>* adyacentes;
 	unsigned int indice;
-	unsigned int prioridad;
 
 public:
 	Vertice(std::string nombre,unsigned int indice);
@@ -21,7 +20,6 @@ public:
 	Lista<Arista*>* obtenerAdyacentes();
 	unsigned int obtenerIndice();
 	void agregarArista(Arista* nuevaArista);
-	void cambiarPrioridad(unsigned int nuevaPrioridad);
 
 };
 

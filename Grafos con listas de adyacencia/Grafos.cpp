@@ -1,5 +1,4 @@
 #include "Grafos.h"
-
 using namespace std;
 
 Grafo::Grafo() {
@@ -94,32 +93,59 @@ void Grafo::recorridoProfundidad(Vertice* vertice) {
 }
 
 void Grafo::mostrarElCaminoMinimo(Vertice* origen, Vertice* destino) {
-	Cola<Vertice*> prioridad = NULL;
+	ColaPrioridad<Vertice*> cola;
 	unsigned int costos[this->obtenerTam()];
-	costos[origen->obtenerIndice()]=0;
 
-	//Inicializo los valores de los vertices adyacentes al origen en el vector estatico
-	for(unsigned int i=1;i<this->obtenerTam();i++){
-		origen->obtenerAdyacentes()->iniciarCursor();
-		while(origen->obtenerAdyacentes()->avanzarCursor()){
-			Arista* actual = origen->obtenerAdyacentes()->avanzarCursor();
-			costos[actual->obtenerDestino()->obtenerIndice()] = actual->obtenerPeso();
+	for (unsigned int i = 0; i < this->obtenerTam(); i++) {
+		costos[i] = 9999999;
+	}
+	costos[origen->obtenerIndice()] = 0;
+
+	// actualizar valores en el arreglo
+	origen->obtenerAdyacentes()->iniciarCursor();
+	while (origen->obtenerAdyacentes()->avanzarCursor()) {
+		Arista* analizada = origen->obtenerAdyacentes()->obtenerCursor();
+		unsigned int costo = analizada->obtenerPeso();
+		costos[analizada->obtenerDestino()->obtenerIndice()] = costo;
+	}
+
+	//Colocar vectores en la cola
+	this->vertices->iniciarCursor();
+	while (this->vertices->avanzarCursor()) {
+		Vertice* actual = this->vertices->obtenerCursor();
+		if (actual->obtenerNombre() != origen->obtenerNombre()) {
+			cola.acolar(actual, costos[actual->obtenerIndice()]);
 		}
 	}
-	//Debo agregar los vertices a una "Cola con prioridad". El mas liviano delante.
 
-	// Mientras el heap(la cola) no este vacia
-	//	x = heap.removerRaiz()
-	//	Para cada vertice W adyacente a X
-	//		D[V] = min(D[V], D[W] + M[w,v])
-	//			Si(w fue mejorado && w pertenece al heap
-	//				heap.actualizarValor(w)
-
+	while (!cola.estaVacia()) {
+		Vertice* actual = cola.desacolar();
+		actual->obtenerAdyacentes()->iniciarCursor();
+		while (actual->obtenerAdyacentes()->avanzarCursor()) {
+			Arista* analizada = actual->obtenerAdyacentes()->obtenerCursor();
+			unsigned int temporal = costos[actual->obtenerIndice()]
+					+ analizada->obtenerPeso();
+			Vertice* actualiza = analizada->obtenerDestino();
+			if (costos[analizada->obtenerDestino()->obtenerIndice()]
+					> temporal) {
+				costos[analizada->obtenerDestino()->obtenerIndice()] = temporal;
+				cola.actualizarValor(actualiza, temporal);
+			}
+		}
+	}
+cout<<endl;
+for (unsigned int i = 0; i < this->obtenerTam(); i++) {
+		cout<<costos[i]<<" - ";
+	}
+cout<<endl;
 }
+
+
 Grafo::~Grafo() {
 	this->vertices->iniciarCursor();
 	while (vertices->avanzarCursor()) {
 		delete this->vertices->obtenerCursor();
 	}
+	delete vertices;
 }
 

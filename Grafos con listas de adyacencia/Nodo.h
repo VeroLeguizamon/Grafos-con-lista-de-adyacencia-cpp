@@ -10,7 +10,7 @@ template<class T> class Nodo {
 private:
 
 	T dato;
-
+	unsigned int prioridad;
 	Nodo<T>* siguiente;
 
 public:
@@ -23,6 +23,7 @@ public:
 
 		this->dato = dato;
 		this->siguiente = NULL;
+		this->prioridad = 0;
 	}
 
 	/*
@@ -55,6 +56,18 @@ public:
 	void cambiarSiguiente(Nodo<T>* nuevoSiguiente) {
 
 		this->siguiente = nuevoSiguiente;
+	}
+	/*
+	 *
+	 */
+	void cambiarPrioridad(unsigned int prioridadNueva){
+		this->prioridad = prioridadNueva;
+	}
+	/*
+	 *
+	 */
+	unsigned int obtenerPrioridad(){
+		return this->prioridad;
 	}
 };
 

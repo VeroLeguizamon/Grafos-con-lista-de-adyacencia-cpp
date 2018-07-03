@@ -1,9 +1,10 @@
-#include "Grafos.h"
 #include <iostream>
-
+#include "Grafos.h"
+#include"ColaConPrioridad.h"
 using namespace std;
 
 int main(){
+
 	Grafo grafo;
 
 	grafo.insertarNodo("TIJ");
@@ -34,10 +35,9 @@ int main(){
 	grafo.insertarArista("MEX", "CUN", 650);
 	grafo.insertarArista("CUN", "GDL", 650);
 
-	grafo.mostrarListaAdyacencia();
+//	grafo.mostrarListaAdyacencia();
 
-	cout<<"Recorrido en profundidad"<<endl;
-	grafo.recorridoProfundidad(grafo.existeNodo("BJX"));
+	grafo.mostrarElCaminoMinimo(grafo.existeNodo("GDL"), grafo.existeNodo("SAN"));
 
 	return 0;
 }

@@ -2,10 +2,6 @@
 
 using namespace std;
 
-Arista::Arista() {
-	this->peso = 0;
-	this->destino = NULL;
-}
 Arista::Arista(Vertice* destino,unsigned int peso) {
 	this->peso = peso;
 	this->destino = destino;

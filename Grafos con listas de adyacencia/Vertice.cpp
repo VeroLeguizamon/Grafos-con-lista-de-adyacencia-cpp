@@ -6,7 +6,6 @@ Vertice::Vertice(string nombre,unsigned int indice){
 	this->nombre = nombre;
 	this->adyacentes = new Lista<Arista*>();
 	this->indice=indice;
-	this->prioridad=0;
 }
 
 Lista<Arista*>* Vertice::obtenerAdyacentes(){
@@ -22,10 +21,12 @@ unsigned int Vertice::obtenerIndice(){
 void Vertice::agregarArista(Arista* nuevaArista){
 	this->adyacentes->agregar(nuevaArista);
 }
-void Vertice::cambiarPrioridad(unsigned int nuevaPrioridad){
-	this->prioridad=nuevaPrioridad;
-}
+
 Vertice::~Vertice(){
+	this->adyacentes->iniciarCursor();
+	while(this->adyacentes->avanzarCursor()){
+		delete this->adyacentes->obtenerCursor();
+	}
 	delete adyacentes;
 }
 

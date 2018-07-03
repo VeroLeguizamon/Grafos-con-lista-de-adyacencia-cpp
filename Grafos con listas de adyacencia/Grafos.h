@@ -2,11 +2,11 @@
 #define GRAFOS_H_
 #include <iostream>
 #include <string>
+#include "ColaConPrioridad.h"
 #include "Listas.h"
-#include "Pila.h"
 #include "Cola.h"
+#include "Pila.h"
 #include "Vertice.h"
-
 enum Estado {
 	VISITADO, NO_VISITADO
 };
