@@ -103,12 +103,12 @@ unsigned int ColaPrioridad<T>::obtenerTam(){
 template<class T>
 void ColaPrioridad<T>::ordenar() {
 	Nodo<T>* anterior = this->frente;
-	unsigned int prioridadAnterior;
+	unsigned int prioridadAnterior, i = 1, j = 1;
 	T datoAnterior;
 
-	while (anterior!=NULL ){
+	while (i<=this->obtenerTam() ){
 		Nodo<T>* siguiente = anterior->obtenerSiguiente();
-		while (siguiente != NULL) {
+		while (j<this->obtenerTam()-1) {
 			if (anterior->obtenerPrioridad() > siguiente->obtenerPrioridad()) {
 				prioridadAnterior = anterior->obtenerPrioridad();
 				datoAnterior = anterior->obtenerDato();
@@ -120,8 +120,10 @@ void ColaPrioridad<T>::ordenar() {
 				siguiente->cambiarDato(datoAnterior);
 			}
 			siguiente = siguiente->obtenerSiguiente();
+			j++;
 		}
 		anterior = anterior->obtenerSiguiente();
+		i++;
 	}
 }
 template<class T>
