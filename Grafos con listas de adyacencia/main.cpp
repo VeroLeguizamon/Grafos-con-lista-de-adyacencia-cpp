@@ -5,7 +5,7 @@ using namespace std;
 
 int main(){
 
-	ColaPrioridad<int> cola;
+	/*ColaPrioridad<int> cola;
 	cola.acolar(4,4);
 	cola.acolar(3,3);
 	cola.acolar(5,5);
@@ -15,8 +15,8 @@ int main(){
 	while(!cola.estaVacia()){
 		cout<<cola.desacolar() <<" -";
 	}
-	cout<<endl;
-	/*Grafo grafo;
+	cout<<endl;*/
+	Grafo grafo;
 
 	grafo.insertarNodo("TIJ");
 	grafo.insertarNodo("MTY");
@@ -48,7 +48,7 @@ int main(){
 
 //	grafo.mostrarListaAdyacencia();
 
-	grafo.mostrarElCaminoMinimo(grafo.existeNodo("GDL"), grafo.existeNodo("SAN"));*/
+	grafo.mostrarElCaminoMinimo(grafo.existeNodo("TIJ"), grafo.existeNodo("SAN"));
 
 	return 0;
 }

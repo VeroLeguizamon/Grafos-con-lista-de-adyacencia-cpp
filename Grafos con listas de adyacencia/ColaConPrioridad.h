@@ -93,7 +93,9 @@ void ColaPrioridad<T>::actualizarValor(T vertice, unsigned int valor){
 		aux = aux->obtenerSiguiente();
 		encontrado = (aux->obtenerDato() == vertice);
 	}
-	aux->cambiarPrioridad(valor);
+	if(encontrado){
+		aux->cambiarPrioridad(valor);
+	}
 	this->ordenar();
 }
 template<class T>

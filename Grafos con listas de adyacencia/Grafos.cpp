@@ -121,7 +121,9 @@ void Grafo::mostrarElCaminoMinimo(Vertice* origen, Vertice* destino) {
 	while (!cola.estaVacia()) {
 		Vertice* actual = cola.desacolar();
 		actual->obtenerAdyacentes()->iniciarCursor();
+
 		while (actual->obtenerAdyacentes()->avanzarCursor()) {
+
 			Arista* analizada = actual->obtenerAdyacentes()->obtenerCursor();
 			unsigned int temporal = costos[actual->obtenerIndice()]
 					+ analizada->obtenerPeso();
@@ -130,6 +132,7 @@ void Grafo::mostrarElCaminoMinimo(Vertice* origen, Vertice* destino) {
 					> temporal) {
 				costos[analizada->obtenerDestino()->obtenerIndice()] = temporal;
 				cola.actualizarValor(actualiza, temporal);
+				cout<<temporal<<endl;
 			}
 		}
 	}
